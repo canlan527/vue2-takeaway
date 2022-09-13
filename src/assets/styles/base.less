@@ -1,0 +1,29 @@
+.g-relative{
+  position: relative;
+}
+
+.silde-enter-active, .silde-leave-active {
+  transition: all 0.3s;
+}
+
+.silde-enter-from, .slide-leave-to {
+  transform: translateX(100%);
+}
+
+.list-enter-active, .list-leave-active{
+  transition: all 0.3s;
+}
+
+.list-enter-from, .list-leave-to {
+  height: 0 !important;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

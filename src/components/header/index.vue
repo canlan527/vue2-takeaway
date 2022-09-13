@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="search-bar">
       <Search></Search>
-      <div class="profile-icon">
+      <div class="profile-icon" @click="goToProfile">
         <i class="iconfont">&#xe682;</i>
       </div>
     </div>
@@ -16,6 +16,11 @@ export default {
   components: {
     Search,
   },
+  methods: {
+    goToProfile() {
+      this.$router.push('/profile')
+    }
+  }
 };
 </script>
 
