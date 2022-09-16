@@ -1,27 +1,31 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
+import Home from '@/views/home'
 
-Vue.use(VueRouter)
+const Profile = () => import('@/views/profile')
+
+Vue.use(VueRouter);
+
 
 const routes = [
   {
-    path: '/',
-    redirect: '/home',
+    path: "/",
+    redirect: "/home",
   },
   {
-    path: 'home',
-    component: () => import('@/views/home')
+    path: "/home",
+    component: Home,
   },
- {
-   name: 'profile',
-   path: '/profile',
-   component: () => import('@/views/profile')
- }
-]
+  {
+    name: "profile",
+    path: "/profile",
+    components: { profile: Profile },
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
