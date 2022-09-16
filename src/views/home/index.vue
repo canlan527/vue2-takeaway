@@ -1,16 +1,38 @@
 <template>
-  <div>
-    home
-
-  </div>
+  <div>home</div>
 </template>
 
 <script>
+import { getGoods } from "@/api/goods";
+import { getSeller } from "@/api/seller";
+import { getRating } from "@/api/ratings";
 export default {
   data() {
     return {
       show: true,
     };
+  },
+  created() {
+    this.getGoods();
+    this.getSeller();
+    this.getRating();
+  },
+  methods: {
+    getGoods() {
+      return getGoods().then((res) => {
+        console.log(res);
+      });
+    },
+    getSeller() {
+      return getSeller().then((res) => {
+        console.log(res);
+      });
+    },
+    getRating() {
+      return getRating().then((res) => {
+        console.log(res);
+      });
+    },
   },
 };
 </script>
