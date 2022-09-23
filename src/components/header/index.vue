@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="header-container"
-    :style="headerStyle"
-  >
+  <div class="header-container" :style="headerStyle">
     <div class="search-bar">
       <Search></Search>
       <div class="profile-icon" @click="goToProfile">
         <i class="iconfont">&#xe682;</i>
       </div>
     </div>
-    <div class="header-avatar" @click="() => this.showMask = !this.showMask">
+    <div class="header-avatar" @click="() => (this.showMask = !this.showMask)">
       <img :src="seller.pic_url" alt="" />
     </div>
     <div class="header-like">
@@ -20,47 +17,48 @@
     </div>
     <transition name="fade">
       <div class="header-mask" v-show="showMask">
-      <div class="header-mask-desc">
-        <div class="header-desc-close" @click.stop="handleShowMash">
-          <i class="iconfont icon-roundclosefill"></i>
-        </div>
-        <div class="header-desc-content">
-          <div class="seller-avatar">
-            <img :src="seller.pic_url" alt="" />
+        <div class="header-mask-desc">
+          <div class="header-desc-close" @click.stop="handleShowMash">
+            <i class="iconfont icon-roundclosefill"></i>
           </div>
-          <div class="seller-name">{{ seller.name }}</div>
-          <div class="seller-rating" v-if="seller.show_info">
-            <i
-              class="iconfont icon-star-fill"
-              v-for="item in rating.rateScoreInt"
-              :key="item"
-            ></i>
-            <i class="iconfont icon-star_half" v-if="rating.half"></i>
-            {{ seller.show_info[0].value }}
+          <div class="header-desc-content">
+            <div class="seller-avatar">
+              <img :src="seller.pic_url" alt="" />
+            </div>
+            <div class="seller-name">{{ seller.name }}</div>
+            <div class="seller-rating" v-if="seller.show_info">
+              <i
+                class="iconfont icon-star-fill"
+                v-for="item in rating.rateScoreInt"
+                :key="item"
+              ></i>
+              <i class="iconfont icon-star_half" v-if="rating.half"></i>
+              {{ seller.show_info[0].value }}
+            </div>
+            <div class="seller-delivery-info">
+              <span class="seller-delivery-item">{{
+                seller.min_price_tip
+              }}</span>
+              |
+              <span class="seller-delivery-item">{{
+                seller.shipping_fee_tip
+              }}</span>
+              |
+              <span class="seller-delivery-item">{{
+                seller.delivery_time_tip
+              }}</span>
+            </div>
+            <div class="seller-delivery-time">
+              配送时间：{{ seller.shipping_time }}
+            </div>
           </div>
-          <div class="seller-delivery-info">
-            <span class="seller-delivery-item">{{ seller.min_price_tip }}</span>
-            |
-            <span class="seller-delivery-item">{{
-              seller.shipping_fee_tip
-            }}</span>
-            |
-            <span class="seller-delivery-item">{{
-              seller.delivery_time_tip
-            }}</span>
+          <div class="header-desc-footer">
+            <span class="attention-special-text">特价</span>
+            <span class="attention-normal-text">特价商品8元起</span>
           </div>
-          <div class="seller-delivery-time">
-            配送时间：{{ seller.shipping_time }}
-          </div>
-        </div>
-        <div class="header-desc-footer">
-          <span class="attention-special-text">特价</span>
-          <span class="attention-normal-text">特价商品8元起</span>
         </div>
       </div>
-    </div>
     </transition>
-    
   </div>
 </template>
 
@@ -99,7 +97,9 @@ export default {
         const rateScore = this.seller.wm_poi_score;
         let rateScoreInt = parseInt(rateScore, 10);
         const rateScoreFloat = parseInt(rateScore.toString().split(".")[1]);
-        rateScoreFloat > 5 ? rateScoreInt++ : ++half;
+        if (rateScoreFloat) {
+          rateScoreFloat > 5 ? rateScoreInt++ : ++half;
+        } 
         return {
           rateScoreInt,
           half,
@@ -121,7 +121,7 @@ export default {
     },
     handleShowMash() {
       this.showMask = false;
-    }
+    },
   },
 };
 </script>
