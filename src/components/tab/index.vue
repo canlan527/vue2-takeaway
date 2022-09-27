@@ -38,6 +38,7 @@ export default {
   line-height: 24px;
   font-size: 14px;
   color: #333;
+  box-shadow: 0 3px 13px 2px rgba(5, 1, 1, 0.1);
   .tab-item {
     flex: 1;
     text-align: center;
